@@ -1,0 +1,21 @@
+
+insert into comments(posted, content, author, book_id) VALUES("2017-12-01 12:11:10", "Świetna książka", "Michał", 1);
+insert into comments(posted, content, author, book_id) VALUES("2017-12-02 12:11:10", "Wspaniała książka", "Maks", 1);
+insert into comments(posted, content, author, book_id) VALUES("2017-12-03 12:11:10", "Cudowna książka", "Marcin", 1);
+insert into comments(posted, content, author, book_id) VALUES("2017-12-09 12:11:10", "Wyśmienita książka", "Mikołaj", 1);
+insert into comments(posted, content, author, book_id) VALUES("2017-12-10 12:11:10", "Piękna książka", "Ministrant", 1);
+insert into comments(posted, content, author, book_id) VALUES("2017-12-08 12:11:10", "Niesamowita książka", "Mormon", 1);
+insert into comments(posted, content, author, book_id) VALUES("2017-12-11 12:11:10", "Nieprzeciętna książka", "MichaelAngelo", 1);
+
+insert into comments_tree(comment_parent_id, comment_child_id) VALUES(1, 2);
+insert into comments_tree(comment_parent_id, comment_child_id) VALUES(1, 3);
+insert into comments_tree(comment_parent_id, comment_child_id) VALUES(3, 4);
+insert into comments_tree(comment_parent_id, comment_child_id) VALUES(1, 5);
+insert into comments_tree(comment_parent_id, comment_child_id) VALUES(3, 7);
+
+insert into comments(posted, content, author, book_id) VALUES("2017-12-07 12:11:10", "Super książka", "Siostrzeniec", 2);
+insert into comments(posted, content, author, book_id) VALUES("2017-12-08 12:11:10", "Mega książka", "Szeryf", 2);
+insert into comments(posted, content, author, book_id) VALUES("2017-12-11 12:11:10", "Hiper książka", "Szperacz", 2);
+insert into comments(posted, content, author, book_id) VALUES("2017-12-12 12:11:10", "Ekstra książka", "Syzyf", 2);
+
+insert into comments_tree(comment_parent_id, comment_child_id) VALUES(9, 11);
