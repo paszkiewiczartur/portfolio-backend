@@ -23,7 +23,7 @@ public class Message {
     private Long id;
     private String email;
     private String credentials;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 9000)
     private String content;
     @Column(nullable = false)
     private LocalDateTime created = LocalDateTime.now();

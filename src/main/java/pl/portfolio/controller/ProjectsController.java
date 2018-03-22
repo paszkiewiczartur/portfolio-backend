@@ -29,6 +29,7 @@ public class ProjectsController {
 		Draft draft = null;
 		for(Project project: projects){
 			draft = modelMapper.map(project, Draft.class);
+			draft.setImage(project.getImagePath());
 			drafts.add(draft);
 		}
 		return drafts;

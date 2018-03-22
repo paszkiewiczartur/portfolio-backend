@@ -19,8 +19,8 @@ public class SiteContent {
 	private Long id;
 	@Column(nullable = false, unique=true)
 	private String path;
-	@Column(nullable = false)
+	@Column(nullable = false, length = 10000)
 	private String descriptionPl;
-	@Column(nullable = false)
+	@Column(nullable = false, length = 10000)
 	private String descriptionEn;
 }

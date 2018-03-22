@@ -40,7 +40,7 @@ public class Comment {
     private Long id;
     @Column(nullable = false)
     private LocalDateTime posted;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 10000)
     private String content;
     @Column(nullable = false)
     private String nickname;

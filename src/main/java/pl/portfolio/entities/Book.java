@@ -36,9 +36,9 @@ public class Book {
     private String path;
     @Column(nullable = false)
     private String author;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 5000)
     private String descriptionPl;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 5000)
     private String descriptionEn;
     private int rating;
     @Column(nullable = false)

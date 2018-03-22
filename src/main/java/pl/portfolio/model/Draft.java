@@ -6,4 +6,5 @@ import lombok.Data;
 public class Draft {
     private String name;
     private String path;
+    private String image;
 }

@@ -29,6 +29,7 @@ public class CoursesController {
 		Draft draft = null;
 		for(Course course: courses){
 			draft = modelMapper.map(course, Draft.class);
+			draft.setImage(course.getImagePath());
 			drafts.add(draft);
 		}
 		return drafts;

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import pl.portfolio.email.ContactEmailSender;
 import pl.portfolio.entities.Entrance;
 import pl.portfolio.entities.Message;
 import pl.portfolio.model.MessageDTO;
@@ -23,6 +24,8 @@ public class ContactController {
 	private MessagesRepository messagesRepo;
 	@Autowired
 	private EntrancesRepository entrancesRepo;
+	@Autowired
+	private ContactEmailSender emailSender;
 	
 	@RequestMapping(value = "/api/messages/save", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
@@ -33,5 +36,8 @@ public class ContactController {
 		Message message = modelMapper.map(messageDTO, Message.class);
 		message.setEntrance(entrance);
 		messagesRepo.save(message);
+		if(messageDTO.getEmail() == null)
+			messageDTO.setEmail("Brak");
+		emailSender.sendHTMLEmail(messageDTO);
 	}
 }

@@ -30,6 +30,7 @@ public class BooksController {
 		Draft draft = null;
 		for(Book book: books){
 			draft = modelMapper.map(book, Draft.class);
+			draft.setImage(book.getImagePath());
 			drafts.add(draft);
 		}
 		return drafts;

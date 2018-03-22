@@ -34,9 +34,9 @@ public class Project {
     private String name;
     @Column(nullable = false, unique=true)
     private String path;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 5000)
     private String descriptionPl;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 5000)
     private String descriptionEn;
     @Column(nullable = false)
     private String imagePath;
