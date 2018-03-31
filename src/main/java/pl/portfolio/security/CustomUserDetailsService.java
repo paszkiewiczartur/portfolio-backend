@@ -17,12 +17,7 @@ import pl.portfolio.repository.UserRepository;
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired 
     private UserRepository userRepository;
-     
-//    @Autowired
-//    public void setUserRepository(UserRepository userRepository) {
-//        this.userRepository = userRepository;
-//    }
-// 
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);

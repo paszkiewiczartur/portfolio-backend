@@ -30,6 +30,7 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_book")
     private Long id;
+    private Long sequence;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false, unique=true)
@@ -48,16 +49,10 @@ public class Book {
     @Column(nullable = false)
     private int pages;
     @Column(nullable = false)
-    //@JsonSerialize(using = LocalDateSerializer.class)
-    //@JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate haveRead;
     @Column(nullable = false)
-    //@JsonSerialize(using = LocalDateSerializer.class)
-    //@JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate posted = LocalDate.now();
     @Column(nullable = false)
-    //@JsonSerialize(using = LocalDateSerializer.class)
-    //@JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate lastUpdate = LocalDate.now();
     @Column(nullable = false)
     private boolean commentsAvailable;
@@ -99,23 +94,4 @@ public class Book {
     private String replaceHtml(String content){
     	return StringUtils.replaceAll(content, "<(.*?)>", " ");    	
     }
-    
-    /*@PreUpdate
-    public void onPersist() {
-    	this.setLastUpdate(LocalDate.now());
-    }*/
-    
-    /*public static class LocalDateSerializer extends JsonSerializer<LocalDate> {
-        @Override
-        public void serialize(LocalDate arg0, JsonGenerator arg1, SerializerProvider arg2) throws IOException, JsonProcessingException {
-            arg1.writeString(arg0.toString());
-        }
-    }
-
-    public static class LocalDateDeserializer extends JsonDeserializer<LocalDate> {
-        @Override
-        public LocalDate deserialize(JsonParser arg0, DeserializationContext arg1) throws IOException, JsonProcessingException {
-            return LocalDate.parse(arg0.getText());
-        }
-    }*/
 }

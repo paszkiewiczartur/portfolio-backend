@@ -7,7 +7,8 @@ public enum Site {
 	Course("course"),//3
 	Book("book"),//4
 	Tag("tag"),//5
-	Home("home");//6
+	Home("home"),//6
+	Signin("signin");//7
 	
 	private String description;
 	

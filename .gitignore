@@ -3,6 +3,8 @@ target/
 
 ###Angular###
 src/main/resources/static/*
+log/*
+upload-dir
 
 ### STS ###
 .apt_generated

@@ -1,7 +1,5 @@
 package pl.portfolio.model;
 
-import java.time.LocalDate;
-
 import lombok.Data;
 
 @Data

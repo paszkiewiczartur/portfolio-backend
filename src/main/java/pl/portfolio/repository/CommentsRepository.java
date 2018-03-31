@@ -7,9 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-import pl.portfolio.entities.Book;
 import pl.portfolio.entities.Comment;
-import pl.portfolio.entities.Project;
 
 @RepositoryRestResource(path = "comments", collectionResourceRel = "comments")
 public interface CommentsRepository extends JpaRepository<Comment, Long> {

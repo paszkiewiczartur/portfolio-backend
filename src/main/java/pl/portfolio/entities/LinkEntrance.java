@@ -1,7 +1,6 @@
 package pl.portfolio.entities;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +23,6 @@ public class LinkEntrance {
     private Long id;
     @Column(nullable = false)
     private LocalDateTime visited = LocalDateTime.now();
-//    private LocalDateTime visited;
     @ManyToOne
     @JoinColumn(name = "entrance_id", nullable = false)
     private Entrance entrance;

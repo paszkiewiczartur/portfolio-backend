@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import lombok.extern.slf4j.Slf4j;
 import pl.portfolio.entities.Comment;
 import pl.portfolio.model.CommentDTO;
 import pl.portfolio.repository.CommentsRepository;
@@ -23,6 +24,7 @@ import pl.portfolio.service.CommentService;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @Controller
+@Slf4j
 public class CommentsController {
 	@Autowired
 	private CommentsRepository commentsRepo;
@@ -31,8 +33,8 @@ public class CommentsController {
 	
 	@RequestMapping(value = "/api/comments/save", method = RequestMethod.POST)
 	public ResponseEntity<?> saveComment(@Valid @RequestBody CommentDTO commentDTO){
-		System.out.println("commentDTO");
-		System.out.println(commentDTO);
+		log.info("commentDTO");
+		log.info(commentDTO.toString());
 		Comment parent = null;
 		if(commentDTO.getParent() != null)
 			parent = commentsRepo.findOne(commentDTO.getParent());
@@ -41,14 +43,16 @@ public class CommentsController {
 			Comment grandparent = commentsRepo.findOne(parent.getParent().getId());
 			if(grandparent != null && grandparent.getParent() != null){
 				grandparent = commentsRepo.findOne(grandparent.getParent().getId());
-				if(grandparent != null)
+				if(grandparent != null){
+					log.info("too many levels of comment nesting");
 					return new ResponseEntity<>(new HttpHeaders(), HttpStatus.METHOD_NOT_ALLOWED);
+				}
 			}
 		}
 		Comment comment = commentService.createComment(commentDTO);
 		if(parent != null)
 			comment.setParent(parent);		
-		commentsRepo.save(comment);
+		commentsRepo.saveAndFlush(comment);
 		return new ResponseEntity<>(new HttpHeaders(), HttpStatus.CREATED);
 	}
 

@@ -1,5 +1,8 @@
 package pl.portfolio.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -29,12 +33,9 @@ public class Link {
 	@Enumerated(EnumType.ORDINAL)
 	@Column(nullable = false)
 	private LinkType linkType;
-	//Book - visit A x 1
-	//Course - visit A x 1
-	//Project - visit, github, download(JavaFX) A x 3
-	//Tags - visit A x 1 
-	//Contact - visit 1 x 1 
-	//About - visit, download(CV) 1 x 2
-	// A = 5, Sum = 33
+	
+	@OneToMany(mappedBy = "link", orphanRemoval=true)
+    private List<LinkEntrance> linkEntrances = new ArrayList<>();
+    
 
 }

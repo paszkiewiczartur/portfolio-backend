@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import lombok.extern.slf4j.Slf4j;
 import pl.portfolio.entities.Book;
 import pl.portfolio.entities.Course;
 import pl.portfolio.entities.Project;
 import pl.portfolio.entities.Tag;
-import pl.portfolio.model.Draft;
 import pl.portfolio.model.Site;
 import pl.portfolio.model.TagDTO;
 import pl.portfolio.model.TagDraft;
@@ -30,6 +30,7 @@ import pl.portfolio.repository.CoursesRepository;
 import pl.portfolio.repository.ProjectsRepository;
 import pl.portfolio.repository.TagsRepository;
 
+@Slf4j
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @Controller
 public class TagsController {
@@ -47,21 +48,21 @@ public class TagsController {
 	public void saveEntity(@Valid @RequestBody TagDTO tagDTO) {
 		Tag tag = tagsRepo.findOne(tagDTO.getTag());
 		tag.setAmount(tag.getAmount() + 1);
-		tagsRepo.save(tag);
+		tagsRepo.saveAndFlush(tag);
 		if (tagDTO.getSite() == Site.Project){
 			Project project = projectsRepo.findOne(tagDTO.getEntity());
 			project.getTags().add(tag);
-			projectsRepo.save(project);
+			projectsRepo.saveAndFlush(project);
 		} else if (tagDTO.getSite() == Site.Course){
 			Course course = coursesRepo.findOne(tagDTO.getEntity());
 			course.getTags().add(tag);
-			coursesRepo.save(course);			
+			coursesRepo.saveAndFlush(course);			
 		} else if (tagDTO.getSite() == Site.Book){
 			Book book = booksRepo.findOne(tagDTO.getEntity());
 			book.getTags().add(tag);
-			booksRepo.save(book);
+			booksRepo.saveAndFlush(book);
 		} else {
-			System.out.println("Error! No site in /api/tags/saveRelation");
+			log.info("ERROR! No site in /api/tags/saveRelation");
 		}		
 	}
 
@@ -70,21 +71,21 @@ public class TagsController {
 	public void deleteEntity(@Valid @RequestBody TagDTO tagDTO) {
 		Tag tag = tagsRepo.findOne(tagDTO.getTag());
 		tag.setAmount(tag.getAmount() - 1);
-		tagsRepo.save(tag);
+		tagsRepo.saveAndFlush(tag);
 		if (tagDTO.getSite() == Site.Project){
 			Project project = projectsRepo.findOne(tagDTO.getEntity());
 			project.getTags().remove(tag);
-			projectsRepo.save(project);
+			projectsRepo.saveAndFlush(project);
 		} else if (tagDTO.getSite() == Site.Course){
 			Course course = coursesRepo.findOne(tagDTO.getEntity());
 			course.getTags().remove(tag);
-			coursesRepo.save(course);			
+			coursesRepo.saveAndFlush(course);			
 		} else if (tagDTO.getSite() == Site.Book){
 			Book book = booksRepo.findOne(tagDTO.getEntity());
 			book.getTags().remove(tag);
-			booksRepo.save(book);
+			booksRepo.saveAndFlush(book);
 		} else {
-			System.out.println("Error! No site in /api/tags/deleteRelation");
+			log.info("ERROR! No site in /api/tags/deleteRelation");
 		}		
 	}
 	

@@ -30,6 +30,7 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_course")
     private Long id;
+    private Long sequence;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false, unique=true)
@@ -45,7 +46,7 @@ public class Course {
     private String imagePath;
     @Column(nullable = false)
     private String link;
-    private float lengthInHours;
+    private Float lengthInHours;
     @Column(nullable = false)
     private LocalDate haveRead;
     @Column(nullable = false)

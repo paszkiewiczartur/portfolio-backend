@@ -5,7 +5,6 @@ import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -43,7 +42,6 @@ public class EmailServiceImpl implements EmailService {
             helper.setSubject(subject);
             helper.setText(text);
 
-//            FileSystemResource file = new FileSystemResource(pathToAttachment);
             ClassPathResource image = new ClassPathResource(pathToAttachment);
             helper.addAttachment(pathToAttachment, image);
 

@@ -38,6 +38,8 @@ public class CommentDeserializer extends StdDeserializer<Comment> {
         comment.setPosted(posted);
         String nickname = node.get("nickname").asText();
         comment.setNickname(nickname);
+        String content = node.get("content").asText();
+        comment.setContent(content);
         return comment;
     }
 }

@@ -8,7 +8,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import pl.portfolio.entities.Book;
-import pl.portfolio.entities.Project;
 
 @RepositoryRestResource(path = "books", collectionResourceRel = "books")
 public interface BooksRepository extends JpaRepository<Book, Long> {

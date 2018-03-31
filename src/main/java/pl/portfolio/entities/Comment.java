@@ -2,7 +2,6 @@ package pl.portfolio.entities;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,11 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-
-import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -40,7 +35,8 @@ public class Comment {
     private Long id;
     @Column(nullable = false)
     private LocalDateTime posted;
-    @Column(nullable = false, length = 10000)
+//    @Column(nullable = false, columnDefinition="text")
+    @Column(nullable = false, length = 9000)
     private String content;
     @Column(nullable = false)
     private String nickname;

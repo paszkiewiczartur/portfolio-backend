@@ -8,7 +8,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import pl.portfolio.entities.Course;
-import pl.portfolio.entities.Project;
 
 @RepositoryRestResource(path = "courses", collectionResourceRel = "courses")
 public interface CoursesRepository extends JpaRepository<Course, Long> {

@@ -8,10 +8,6 @@ import lombok.Data;
 
 @Data
 public class IpAddressDTO {
-	/*private Long id;
-	private Guest guest;
-	private Entrance entrance;*/
-
 	private Long id;
 	private String appLanguage;
 	private String browserLanguage;

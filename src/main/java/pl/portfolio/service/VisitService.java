@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
 import pl.portfolio.entities.Entrance;
 import pl.portfolio.entities.Guest;
 import pl.portfolio.entities.IpAddress;
@@ -20,6 +21,7 @@ import pl.portfolio.repository.IpAddressRepository;
 import pl.portfolio.repository.VisitErrorsRepository;
 
 @Service
+@Slf4j
 public class VisitService {
 	private final Long ADMIN_IP_ADDRESS = Integer.toUnsignedLong(2);
 	private final Long VISIT_ERROR_GUEST_ID = Integer.toUnsignedLong(1);
@@ -68,18 +70,18 @@ public class VisitService {
 	}
 	
 	private VisitData saveDataStorageEmptyAndIpInDB(IpAddressDTO ipAddressDTO, IpAddress ipAddress){
-		System.out.println("Cleaned storage, ip in database");
+		log.info("Cleaned storage, ip in database");
 		return new VisitData(ipAddress.getId(), ipAddress.getGuest().getId(), saveEntrance(ipAddressDTO, ipAddress));
 	}
 	
 	private VisitData saveDataStorageEmptyAndNewGuest(IpAddressDTO ipAddressDTO, IpAddress ipAddress){
-		System.out.println("New guest, no ip in database");
+		log.info("New guest, no ip in database");
 		ModelMapper modelMapper = new ModelMapper();
 		Guest guest = new Guest();
-		guest = guestsRepo.save(guest);
+		guest = guestsRepo.saveAndFlush(guest);
 		ipAddress = modelMapper.map(ipAddressDTO, IpAddress.class);
 		ipAddress.setGuest(guest);
-		ipAddress = ipAddressRepo.save(ipAddress);
+		ipAddress = ipAddressRepo.saveAndFlush(ipAddress);
 		return new VisitData(ipAddress.getId(), guest.getId(), saveEntrance(ipAddressDTO, ipAddress));
 	}
 	
@@ -88,7 +90,7 @@ public class VisitService {
 		entrance.setIp_address(ipAddress);
 		entrance.setBrowser(ipAddressDTO.getBrowser());
 		entrance.setBrowserVersion(ipAddressDTO.getBrowserVersion());
-		entrance = entrancesRepo.save(entrance);
+		entrance = entrancesRepo.saveAndFlush(entrance);
 		return entrance.getId();
 	}
 
@@ -136,7 +138,7 @@ public class VisitService {
 	}
 	
 	private VisitError saveDataMissingIpId(IpAddressDTO ipAddressDTO){
-		System.out.println("Error | " + VisitErrorType.MISSING_IP_ID);
+		log.info("Error | " + VisitErrorType.MISSING_IP_ID);
 		VisitError visitError = new VisitError();
 		visitError.setVisitErrorType(VisitErrorType.MISSING_IP_ID);
 		visitError.setGuest(ipAddressDTO.getGuest_id());
@@ -147,7 +149,7 @@ public class VisitService {
 	}
 	
 	private VisitError saveDataMissingGuest(IpAddressDTO ipAddressDTO){
-		System.out.println("Error | " + VisitErrorType.MISSING_GUEST);
+		log.info("Error | " + VisitErrorType.MISSING_GUEST);
 		VisitError visitError = new VisitError();
 		visitError.setVisitErrorType(VisitErrorType.MISSING_GUEST);
 		visitError.setIpAddress(ipAddressDTO.getId());
@@ -158,7 +160,7 @@ public class VisitService {
 	}
 	
 	private VisitError saveDataMissingIp(IpAddressDTO ipAddressDTO){
-		System.out.println("Error | " + VisitErrorType.MISSING_IP);
+		log.info("Error | " + VisitErrorType.MISSING_IP);
 		VisitError visitError = new VisitError();
 		visitError.setVisitErrorType(VisitErrorType.MISSING_IP);
 		visitError.setGuest(ipAddressDTO.getGuest_id());
@@ -167,7 +169,7 @@ public class VisitService {
 	}
 
 	private VisitError saveDataGuestNotFound(IpAddressDTO ipAddressDTO){
-		System.out.println("Error | " + VisitErrorType.GUEST_NOT_FOUND);
+		log.info("Error | " + VisitErrorType.GUEST_NOT_FOUND);
 		VisitError visitError = new VisitError();
 		visitError.setVisitErrorType(VisitErrorType.GUEST_NOT_FOUND);
 		visitError.setGuest(ipAddressDTO.getGuest_id());
@@ -177,7 +179,7 @@ public class VisitService {
 	}				
 	
 	private VisitError saveDataIpNotFound(IpAddressDTO ipAddressDTO){
-		System.out.println("Error | " + VisitErrorType.IP_NOT_FOUND);
+		log.info("Error | " + VisitErrorType.IP_NOT_FOUND);
 		VisitError visitError = new VisitError();
 		visitError.setVisitErrorType(VisitErrorType.IP_NOT_FOUND);
 		visitError.setGuest(ipAddressDTO.getGuest_id());
@@ -196,27 +198,27 @@ public class VisitService {
 	}
 
 	private VisitData saveDataOldUserDifferentIpButInDB(IpAddressDTO ipAddressDTO, IpAddress ipAddress){
-		System.out.println("Old user and his current ip is present in database but different from the last visit");
+		log.info("Old user and his current ip is present in database but different from the last visit");
 		return new VisitData(ipAddress.getId(), ipAddress.getGuest().getId(), saveEntrance(ipAddressDTO, ipAddress));
 	}	
 
 	private VisitData saveDataOldUserNewIp(IpAddressDTO ipAddressDTO, Guest guest){
-		System.out.println("Old user, new ip");
+		log.info("Old user, new ip");
 		ModelMapper modelMapper = new ModelMapper();
 		IpAddress ipAddress = modelMapper.map(ipAddressDTO, IpAddress.class);
 		ipAddress.setId(null);
 		ipAddress.setGuest(guest);
-		ipAddress = ipAddressRepo.save(ipAddress);
+		ipAddress = ipAddressRepo.saveAndFlush(ipAddress);
 		return new VisitData(ipAddress.getId(), ipAddress.getGuest().getId(), saveEntrance(ipAddressDTO, ipAddress));
 	}	
 	
 	private VisitData saveDataOldUserSameIp(IpAddressDTO ipAddressDTO, IpAddress ipAddress){
-		System.out.println("Old user, last visit ip == current visit ip");
+		log.info("Old user, last visit ip == current visit ip");
 		return new VisitData(ipAddressDTO.getId(), ipAddressDTO.getGuest_id(), saveEntrance(ipAddressDTO, ipAddress));
 	}
 
 	private VisitData saveDataInvalidOrError(IpAddressDTO ipAddressDTO, VisitError visitError){
-		visitErrorsRepo.save(visitError);
+		visitErrorsRepo.saveAndFlush(visitError);
 		IpAddress ipAddress = ipAddressRepo.findOne(VISIT_ERROR_IP_ADDRESS_ID);
 		return new VisitData(ipAddress.getId(), VISIT_ERROR_GUEST_ID, saveEntrance(ipAddressDTO, ipAddress));
 	}

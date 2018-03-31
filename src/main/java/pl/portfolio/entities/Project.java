@@ -30,6 +30,7 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_project")
     private Long id;
+    private Long sequence;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false, unique=true)

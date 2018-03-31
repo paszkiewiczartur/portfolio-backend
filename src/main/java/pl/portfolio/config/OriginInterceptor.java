@@ -18,7 +18,6 @@ public class OriginInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)
     throws Exception {
-    	//response.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
     	response.setHeader("allow", "GET, HEAD, POST");
     	response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
     	System.out.println("inside postHandle");

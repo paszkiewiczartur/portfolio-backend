@@ -1,7 +1,6 @@
 package pl.portfolio.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
 
@@ -22,12 +21,6 @@ public class RepositoryConfig extends RepositoryRestConfigurerAdapter {
         config.exposeIdsFor(Book.class);
         config.exposeIdsFor(Tag.class);
         config.exposeIdsFor(SiteContent.class);
-//        config.getCorsRegistry()
-//        	.addMapping("/**")
-//        	.allowedOrigins("http:localhost:4200")
-//        	.allowedHeaders("*")
-//        	.allowedMethods("POST", "GET", "OPTIONS");
-//   
     }
 
 }
