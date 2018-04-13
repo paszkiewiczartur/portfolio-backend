@@ -2,7 +2,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 
 ###Angular###
-src/main/resources/static/*
+src/main/resources/static/
 log/*
 upload-dir
 

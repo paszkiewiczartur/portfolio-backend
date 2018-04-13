@@ -16,7 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class StorageService {
- 	private final Path rootLocation = Paths.get("upload-dir");
+ 	private final Path rootLocation = Paths.get("/usr/local/opt/main/upload-dir");
+// 	private final Path rootLocation = Paths.get("upload-dir");
  
 	public void store(MultipartFile file) {
 		try {

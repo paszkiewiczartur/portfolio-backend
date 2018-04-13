@@ -33,6 +33,7 @@ public class Course {
     private Long sequence;
     @Column(nullable = false)
     private String name;
+    private String nameLong;
     @Column(nullable = false, unique=true)
     private String path;
     @Column(nullable = false)

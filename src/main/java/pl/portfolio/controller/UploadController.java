@@ -1,6 +1,9 @@
 package pl.portfolio.controller;
 
 
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,7 +35,7 @@ public class UploadController {
 
 	List<String> files = new ArrayList<String>();
 
-	@PostMapping("/post")
+	@PostMapping("/api/postFile")
 	public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) {
 		String message = "";
 		try {
@@ -47,8 +50,9 @@ public class UploadController {
 		}
 	}
 
-	@GetMapping("/getallfiles")
+	@GetMapping("/api/getallfiles")
 	public ResponseEntity<List<String>> getListFiles(Model model) {
+		mapFiles();
 		List<String> fileNames = files
 				.stream().map(fileName -> MvcUriComponentsBuilder
 						.fromMethodName(UploadController.class, "getFile", fileName).build().toString())
@@ -64,5 +68,15 @@ public class UploadController {
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
 				.body(file);
+	}
+	
+	public void mapFiles(){
+		Path file = Paths.get("/usr/local/opt/main/upload-dir");
+//		Path file = Paths.get("upload-dir");
+		files.clear();
+		for(File f : file.toFile().listFiles()){
+			  files.add(f.getName());
+		}
+
 	}
 }

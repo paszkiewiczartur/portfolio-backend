@@ -9,8 +9,8 @@
 
     <!-- Rolling File Appender -->
     <RollingFile name="RollingFile">
-      <FileName>log/mylog.log</FileName>
-      <FilePattern>log/%d{yyyy-MM-dd-hh-mm}.log</FilePattern>
+      <FileName>/usr/local/opt/main/log/mylog.log</FileName>
+      <FilePattern>/usr/local/opt/main/log/%d{yyyy-MM-dd}.log</FilePattern>
       <PatternLayout>
         <Pattern>%d{yyyy-MM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n</Pattern>
       </PatternLayout>

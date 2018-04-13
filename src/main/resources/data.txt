@@ -16,6 +16,8 @@ insert into links(site, entity_id, link_type) VALUES(0, 1, 2);
 insert into links(site, entity_id, link_type) VALUES(1, 1, 0);
 insert into links(site, entity_id, link_type) VALUES(1, 1, 1);
 insert into links(site, entity_id, link_type) VALUES(6, 1, 0);
+insert into links(site, entity_id, link_type) VALUES(7, 1, 0);
+insert into links(site, entity_id, link_type) VALUES(7, 1, 1);
 
 insert into tags(path, name, name_en, amount, added) VALUES("java", "Java", "Java", 5, "2017-12-10");
 insert into tags(path, name, name_en, amount, added) VALUES("angular", "Angular", "Angular", 2, "2017-12-10");
@@ -37,8 +39,8 @@ insert into links(site, entity_id, link_type) VALUES(5, 2, 0);
 insert into links(site, entity_id, link_type) VALUES(5, 3, 0);
 
 insert into books(name, path, author, description_pl, description_en, rating, image_path, link, pages, have_read, posted, last_update, comments_available, search_string) VALUES("Myślenie w Javie", "thinking-in-java", "Jakiś autor", "Bardzo dobra pozycja dla osób początkujących. Omawia takie tematy jak rekurencja, derekursywacja (zamiana rekurencji na postać iteracyjną), podstawowe typy i struktury danych, grafy. Porusza także zagadnienia algorytmów sortujących i przeszukiwania tekstu. W książce zostały też przedstawione metody obliczania złożoności obliczeniowej. Uważam ją za ciekawą pozycję, którą chętnie się czytało. Jedynie pewną trudność sprawia zrozumienie wyższej matematyki potrzebne do obliczania złożoności obliczeniowej. Ta pozycja jest wartościowym wstępem do tematyki algorytmów i struktur danych.", "Opis angielski thinking in java", 8, "/assets/czysty-kod-martin.png", "http://google.pl", 100, "2016-12-03",  "2017-12-03", "2017-12-03", true, "Myślenie w Javie Jakiś autor Opis polski thinking in java Opis angielski thinking in java http://google.pl");
-insert into books(name, path, author, description_pl, description_en, rating, image_path, link, pages, have_read, posted, last_update, comments_available, search_string) VALUES("Sass dla opornych", "sass", "Jakiś inny autor", "Opis polski sass", "Opis angielski sass", 10, "/assets/pierwsze-kroki-sql-nield.png", "http://onet.pl", 100, "2016-06-03", "2017-11-03", "2017-11-03", true, "Sass dla opornych Jakiś inny autor Opis polski sass Opis angielski sass http://onet.pl");
-insert into books(name, path, author, description_pl, description_en, rating, image_path, link, pages, have_read, posted, last_update, comments_available, search_string) VALUES("Czysty kod", "czysty-kod", "Jakiś inny autor", "Opis polski sass", "Opis angielski sass", 10, "/assets/ocpjp-lipinski.png", "http://onet.pl", 100, "2016-06-03", "2017-11-03", "2017-11-03", true, "Sass dla opornych Jakiś inny autor Opis polski sass Opis angielski sass http://onet.pl");
+insert into books(name, path, author, description_pl, description_en, rating, image_path, link, pages, have_read, posted, last_update, comments_available, search_string) VALUES("Sass dla opornych", "sass", "Jakiś inny autor", "Opis polski sass", "Opis angielski sass", 10, "files/pierwsze-kroki-sql-nield.png", "http://onet.pl", 100, "2016-06-03", "2017-11-03", "2017-11-03", true, "Sass dla opornych Jakiś inny autor Opis polski sass Opis angielski sass http://onet.pl");
+insert into books(name, path, author, description_pl, description_en, rating, image_path, link, pages, have_read, posted, last_update, comments_available, search_string) VALUES("Czysty kod", "czysty-kod", "Jakiś inny autor", "Opis polski sass", "Opis angielski sass", 10, "files/ocpjp-lipinski.png", "http://onet.pl", 100, "2016-06-03", "2017-11-03", "2017-11-03", true, "Sass dla opornych Jakiś inny autor Opis polski sass Opis angielski sass http://onet.pl");
 insert into links(site, entity_id, link_type) VALUES(4, 1, 0);
 insert into links(site, entity_id, link_type) VALUES(4, 1, 1);
 insert into links(site, entity_id, link_type) VALUES(4, 2, 0);
@@ -105,3 +107,4 @@ insert into comments(posted, content, nickname, project_id, comment_parent_id) V
 insert into comments(posted, content, nickname, project_id, comment_parent_id) VALUES("2017-12-01 12:11:10", "Projekt jak O mnie się nie martw", "Lelum Polelum", 2, 21);
 insert into comments(posted, content, nickname, project_id, comment_parent_id) VALUES("2017-12-01 12:11:10", "Projekt jak Klan", "Lizus", 2, null);
 insert into comments(posted, content, nickname, project_id, comment_parent_id) VALUES("2017-12-01 12:11:10", "Projekt jak Na Wspólnej", "Leżajsk", 2, 23);
+

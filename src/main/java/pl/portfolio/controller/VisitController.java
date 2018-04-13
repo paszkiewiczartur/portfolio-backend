@@ -29,6 +29,8 @@ public class VisitController {
     @ResponseBody
     public Principal login(Principal user) {
     	log.info("/login endpoint");
+    	log.info(user.getName().toString());
+    	System.out.println(user.getName().toString());
         return user;
     }
 	
